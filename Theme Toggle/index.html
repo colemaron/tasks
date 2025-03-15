@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<style>
+		body {
+			transition: 250ms ease-out;
+		}
+	</style>
+</head>
+<body>
+	<button>Dark Mode</button>
+
+	<script>
+		let dark = false;
+
+		const button = document.querySelector("button");
+
+		button.addEventListener("click", () => {
+			dark = !dark;
+
+			document.body.style.backgroundColor = dark ? "black" : "white";
+			button.textContent = dark ? "Light Mode" : "Dark Mode";
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Fonts</title>
+
+	<script src="app.js" defer></script>
+
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div id="sidebar">
+		<h3>Preview</h3>
+		
+		<input id="preview" type="text" value="abcdefghijklmnopqrstuvwxyz1234567890" placeholder="Preview text">
+	</div>
+
+	<div id="main">
+		<form id="search-form">
+			<div>
+				<input type="text" name="query" placeholder="Search google fonts">
+
+				<select name="sort">
+					<option value="trending">Trending</option>
+					<option value="popularity">Popularity</option>
+					<option value="alpha">Alphabetical</option>
+					<option value="date">Newest</option>
+					<option value="style">Styles</option>
+				</select>
+			</div>
+
+			<!-- <button>Search</button> -->
+		</form>
+
+		<div id="results"></div>
+	</div>
+</body>
+</html>
