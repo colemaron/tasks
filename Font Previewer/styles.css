@@ -82,6 +82,10 @@ body {
 .font {
 	padding: 0.5rem 1rem;
 
+	&.download {
+		display: none;
+	}
+
 	&:hover {
 		cursor: pointer;
 		background-color: #eee;
@@ -91,10 +95,11 @@ body {
 }
 
 .sample {
-	font-size: 3rem;
+	font-size: 2rem;
 	white-space: nowrap;
 
 	background: linear-gradient(to left, transparent, black 10%);
+	background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
