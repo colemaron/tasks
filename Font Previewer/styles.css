@@ -95,10 +95,10 @@ body {
 }
 
 .sample {
-	font-size: 2rem;
+	font-size: 40px;
 	white-space: nowrap;
 
-	background: linear-gradient(to left, transparent, black 10%);
+	background: linear-gradient(to right, black 90%, transparent);
 	background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

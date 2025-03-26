@@ -26,13 +26,15 @@ async function loadFont(font) {
 
 // scroll observer
 
-const observer = new IntersectionObserver((entries, observer) => {
+const observer = new IntersectionObserver( async (entries, observer) => {
 	for (const entry of entries) {
 		if (entry.isIntersecting) {
 			const element = entry.target;
 			const font = element.dataset.font;
 
-			loadFont(font.replace(/\s+/g, "+"));
+			const formatted = font.replace(/\+/g, " ");
+
+			loadFont(formatted);
 
 			observer.unobserve(element);
 		}
@@ -41,50 +43,25 @@ const observer = new IntersectionObserver((entries, observer) => {
 
 // create font element
 
+const template = document.getElementById("font-template");
+
 function createFontElement(font) {
-	// main font element
+	const clone = template.content.cloneNode(true);
+	const container = clone.firstElementChild;
 
-	const div = document.createElement("div");
-	div.dataset.font = font.family;
-	div.classList.add("font")
+	[ family, sample ] = container.children;
 
-	// font family name
-
-	const h4 = document.createElement("h4");
-	h4.textContent = font.family;
-
-	// sample text
-	
-	const sample = document.createElement("p");
 	sample.style.fontFamily = font.family;
+	family.textContent = font.family;
 	sample.textContent = preview.value;
-	sample.classList.add("sample");
 
-	// download
-
-	const a = document.createElement("a");
-	a.textContent = "Download";
-	a.href = font.files.regular;
-	a.classList.add("download");
-
-	// append children
-	
-	div.appendChild(h4);
-	div.appendChild(sample);
-	div.appendChild(a);
-
-	return div;
+	results.appendChild(clone);
 }
 
 // create elements
 
 fetchFonts().then(fonts => {
-	for (const font of fonts) {
-		const element = createFontElement(font);
-
-		results.appendChild(element);
-		observer.observe(element);
-	}
+	fonts.forEach(font => createFontElement(font));
 });
 
 // update samples
@@ -96,35 +73,3 @@ preview.addEventListener("input", () => {
 		sample.textContent = preview.value;
 	}
 })
-
-// search fonts
-
-const form = document.getElementById("search-form");
-
-form.addEventListener("input", event => {
-	event.preventDefault();
-
-	// get form values
-
-	const data = new FormData(form);
-	const query = data.get("query").toLowerCase();
-
-	const sort = data.get("sort");
-
-	// clear results
-
-	results.innerHTML = "";
-	
-	// filter results
-
-	fetchFonts(sort).then(fonts => {
-		const filtered = fonts.filter(font => font.family.toLowerCase().includes(query));
-
-		for (const font of filtered) {
-			const element = createFontElement(font);
-
-			results.appendChild(element);
-			observer.observe(element);
-		}
-	})
-});
