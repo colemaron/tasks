@@ -6,6 +6,7 @@ const regex = {
 	email:    /^[a-z0-9_.+-]+@[a-z0-9-]+\.[a-z]+$/i,
 	phone:    /^[(]?\d{3}[ )-]*\d{3}[ -]?\d{4}$/,
 	card:     /^(?:\d{4}[ -]?){4}$/
+	
 }
 
 form.addEventListener("input", event => {

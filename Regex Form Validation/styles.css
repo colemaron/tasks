@@ -33,11 +33,6 @@ p {
 	font-size: 0.75rem;
 }
 
-label:has(+ * + input.error)::after {
-	content: " * ";
-	color: red;
-}
-
 input {
 	padding: 0.75rem;
 	border-radius: 0.25rem;

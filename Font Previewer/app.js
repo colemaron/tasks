@@ -5,17 +5,42 @@ const api = `https://www.googleapis.com/webfonts/v1/webfonts?key=${key}`;
 
 // fetch fonts
 
-async function fetchFonts(sort = "trending") {
+let fonts = [];
+
+async function fetchFonts(sort = "alpha", category = "all", subset = "all") {
 	const url = `${api}&sort=${sort}`;
 	const response = await fetch(url).then(response => response.json());
 
-	return response.items;
+	let final = response.items;
+
+	if (category !== "all") {
+		final = final.filter(font => font.category === category);
+	}
+
+	if (subset !== "all") {
+		final = final.filter(font => font.subsets.includes(subset));
+	}
+
+	return fonts = final;
 }
 
 // load font
 
-async function loadFont(font) {
-	const url = `https://fonts.googleapis.com/css?family=${font}`;
+const loaded = new Set();
+
+async function loadFonts(fonts) {
+	// check if already loaded then add loading ones
+
+	const filtered = fonts.filter(font => !loaded.has(font.family));
+
+	if (filtered.length === 0) return;
+
+	filtered.forEach(font => loaded.add(font.family));
+
+	// load fonts
+
+	const query = fonts.map(({ family }) => `family=${family.replace(/\s/g, "+")}`).join("&");
+	const url = `https://fonts.googleapis.com/css2?${query}`;
 
 	const link = document.createElement("link");
 	link.rel = "stylesheet";
@@ -24,52 +49,72 @@ async function loadFont(font) {
 	document.head.appendChild(link);
 }
 
-// scroll observer
+// update elements
 
-const observer = new IntersectionObserver( async (entries, observer) => {
-	for (const entry of entries) {
-		if (entry.isIntersecting) {
-			const element = entry.target;
-			const font = element.dataset.font;
+const preview = document.getElementById("preview-form");
+const results = document.getElementById("results");
 
-			const formatted = font.replace(/\+/g, " ");
+preview.addEventListener("input", event => {
+	event.preventDefault();
 
-			loadFont(formatted);
+	const data = new FormData(preview);
 
-			observer.unobserve(element);
-		}
-	}
-}, { root: results, threshold: 0 } );
+	const text = data.get("text");
+
+	results.querySelectorAll(".preview").forEach(preview => preview.textContent = text);
+});
 
 // create font element
 
-const template = document.getElementById("font-template");
-
 function createFontElement(font) {
+	const template = document.getElementById("font-template");
 	const clone = template.content.cloneNode(true);
-	const container = clone.firstElementChild;
 
-	[ family, sample ] = container.children;
+	clone.querySelector(".family").textContent = font.family;
 
-	sample.style.fontFamily = font.family;
-	family.textContent = font.family;
-	sample.textContent = preview.value;
+	const text = clone.querySelector(".preview");
+	text.style.fontFamily = font.family;
+	text.style.fontSize = "36px";
+	text.textContent = preview.text.textContent;
 
 	results.appendChild(clone);
 }
 
-// create elements
+// get possible values
 
-fetchFonts().then(fonts => {
-	fonts.forEach(font => createFontElement(font));
-});
+const keys = ["category", "subsets"]
 
-// update samples
+async function getUniqueValues() {
+	const unique = {};
 
-preview.addEventListener("input", () => {
-	const samples = document.querySelectorAll(".sample");
-
-	for (const sample of samples) {
-		sample.textContent = preview.value;
+	for (const key of keys) {
+		unique[key] = [...new Set(fonts.flatMap(font => font[key]))].sort();
 	}
-})
+
+	return unique;
+}
+
+// fill options
+
+const filters = document.getElementById("filter-form");
+
+fetchFonts().then( async fonts => {
+	// create all font elements
+	
+	fonts.forEach(createFontElement);
+
+	// fill filters with possible values
+
+	const values = getUniqueValues();
+
+	for (const [filter, possible] of Object.entries(values)) {
+		for (const value of possible) {
+			const option = document.createElement("option");
+
+			option.value = value;
+			option.textContent = value[0].toUpperCase() + value.slice(1);
+
+			filters[filter].appendChild(option);
+		}
+	}
+});
