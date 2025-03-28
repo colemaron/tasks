@@ -16,38 +16,7 @@
 		<form id="preview-form">
 			<textarea id="preview-text" name="text">The quick brown fox jumped over the lazy dog</textarea>
 
-			<select name="size">
-				<option value="4">4px</option>
-				<option value="8">8px</option>
-				<option value="12">12px</option>
-				<option value="14">14px</option>
-				<option value="16">16px</option>
-				<option value="20">20px</option>
-				<option value="24">24px</option>
-				<option value="36" selected>36px</option>
-				<option value="48">48px</option>
-				<option value="64">64px</option>
-				<option value="96">96px</option>
-				<option value="120">120px</option>
-				<option value="184">184px</option>
-				<option value="280">280px</option>
-			</select>
-		</form>
-
-		<h3>Filters</h3>
-
-		<form id="filter-form">
-			<p>Category</p>
-
-			<select id="category-options" name="category">
-				<option value="all">All</option>
-			</select>
-
-			<p>Subset</p>
-
-			<select id="subset-options" name="subsets">
-				<option value="all">All</option>
-			</select>
+			<input name="size" type="range">
 		</form>
 	</div>
 
@@ -62,6 +31,10 @@
 					<option value="alpha">Alphabetical</option>
 					<option value="date">Newest</option>
 					<option value="style">Style Count</option>
+				</select>
+
+				<select name="category" id="category-select">
+					<option value="">All</option>
 				</select>
 			</div>
 		</form>

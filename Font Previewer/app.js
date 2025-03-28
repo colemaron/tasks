@@ -3,118 +3,107 @@
 const key = "AIzaSyDkjOgHdwmrIIsNXTeVC1ws8RjQloTHJE4";
 const api = `https://www.googleapis.com/webfonts/v1/webfonts?key=${key}`;
 
-// fetch fonts
+String.prototype.capitalize = function() { return this.charAt(0).toUpperCase() + this.slice(1); }
+String.prototype.urlify = function() { return this.replace(/\s/g, "+"); }
 
-let fonts = [];
+// load available fonts
 
-async function fetchFonts(sort = "alpha", category = "all", subset = "all") {
-	const url = `${api}&sort=${sort}`;
-	const response = await fetch(url).then(response => response.json());
+async function getFonts(sort, category, query) {
+	const url = `${api}&sort=${sort}${category ? `&category=${category}` : ""}`;
 
-	let final = response.items;
+	const regex = new RegExp(query, "ig");
 
-	if (category !== "all") {
-		final = final.filter(font => font.category === category);
-	}
+	const data = await fetch(url)
+		.then(response => response.json())
+		.then(data => data.items
+			.filter(font => regex.test(font.family))
+		);
 
-	if (subset !== "all") {
-		final = final.filter(font => font.subsets.includes(subset));
-	}
-
-	return fonts = final;
+	return data;
 }
 
-// load font
+// create font element
 
-const loaded = new Set();
+const template = document.getElementById("font-template");
 
-async function loadFonts(fonts) {
-	// check if already loaded then add loading ones
+function createFontElement(font) {
+	const clone = template.content.cloneNode(true);
 
-	const filtered = fonts.filter(font => !loaded.has(font.family));
+	clone.querySelector(".family").textContent = font.family;
 
-	if (filtered.length === 0) return;
+	const preview = clone.querySelector(".preview");
+	preview.textContent = "The quick brown fox jumped over the lazy dog";
+	preview.style.fontFamily = font.family;
 
-	filtered.forEach(font => loaded.add(font.family));
+	results.appendChild(clone);
+}
 
-	// load fonts
+// show fonts
 
-	const query = fonts.map(({ family }) => `family=${family.replace(/\s/g, "+")}`).join("&");
+const results = document.getElementById("results");
+
+function showFonts(fonts) {
+	// remove old results
+
+	results.querySelectorAll(".font").forEach(font => font.remove());
+
+	// add new results
+
+	fonts.forEach(createFontElement);
+}
+
+// load fonts
+
+function loadFonts(fonts) {
+	const query = fonts.map(font => `family=${font.family}`).join("&");
+
 	const url = `https://fonts.googleapis.com/css2?${query}`;
 
 	const link = document.createElement("link");
+
 	link.rel = "stylesheet";
 	link.href = url;
 
 	document.head.appendChild(link);
 }
 
-// update elements
+// load initial fonts
 
-const preview = document.getElementById("preview-form");
-const results = document.getElementById("results");
+const category = document.getElementById("category-select");
 
-preview.addEventListener("input", event => {
+getFonts("date").then( async fonts => {
+	showFonts(fonts);
+
+	// add possible categories
+
+	const categories = new Set(fonts.map(font => font.category));
+
+	for (const value of categories) {
+		const option = document.createElement("option");
+
+		option.value = value;
+		option.textContent = value.capitalize();
+
+		category.appendChild(option);
+	}
+})
+
+// search fonts
+
+const search = document.getElementById("search-form");
+
+search.addEventListener("submit", event => event.preventDefault());
+
+search.addEventListener("input", event => {
 	event.preventDefault();
 
-	const data = new FormData(preview);
+	const data = new FormData(search);
 
-	const text = data.get("text");
+	const sort = data.get("sort");
+	const category = data.get("category");
+	const query = data.get("query");
 
-	results.querySelectorAll(".preview").forEach(preview => preview.textContent = text);
-});
+	// load fonts
 
-// create font element
-
-function createFontElement(font) {
-	const template = document.getElementById("font-template");
-	const clone = template.content.cloneNode(true);
-
-	clone.querySelector(".family").textContent = font.family;
-
-	const text = clone.querySelector(".preview");
-	text.style.fontFamily = font.family;
-	text.style.fontSize = "36px";
-	text.textContent = preview.text.textContent;
-
-	results.appendChild(clone);
-}
-
-// get possible values
-
-const keys = ["category", "subsets"]
-
-async function getUniqueValues() {
-	const unique = {};
-
-	for (const key of keys) {
-		unique[key] = [...new Set(fonts.flatMap(font => font[key]))].sort();
-	}
-
-	return unique;
-}
-
-// fill options
-
-const filters = document.getElementById("filter-form");
-
-fetchFonts().then( async fonts => {
-	// create all font elements
-	
-	fonts.forEach(createFontElement);
-
-	// fill filters with possible values
-
-	const values = getUniqueValues();
-
-	for (const [filter, possible] of Object.entries(values)) {
-		for (const value of possible) {
-			const option = document.createElement("option");
-
-			option.value = value;
-			option.textContent = value[0].toUpperCase() + value.slice(1);
-
-			filters[filter].appendChild(option);
-		}
-	}
-});
+	getFonts(sort, category, query).then(showFonts);
+})
