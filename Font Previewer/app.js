@@ -5,21 +5,21 @@ const api = `https://www.googleapis.com/webfonts/v1/webfonts?key=${key}`;
 
 String.prototype.capitalize = function() { return this.charAt(0).toUpperCase() + this.slice(1); }
 String.prototype.urlify = function() { return this.replace(/\s/g, "+"); }
+String.prototype.search = function() { return this.replace(/\s/g, "%20"); }
+String.prototype.has = function(other) { return this.toLowerCase().includes(other.toLowerCase()); }
 
 // load available fonts
 
-async function getFonts(sort, category, query) {
-	const url = `${api}&sort=${sort}${category ? `&category=${category}` : ""}`;
+let fonts = [];
 
-	const regex = new RegExp(query, "ig");
+async function fetchFonts(sort) {
+	const url = `${api}&sort=${sort}`;
 
-	const data = await fetch(url)
+	fonts = await fetch(url)
 		.then(response => response.json())
-		.then(data => data.items
-			.filter(font => regex.test(font.family))
-		);
+		.then(data => data.items);
 
-	return data;
+	return fonts;
 }
 
 // create font element
@@ -50,28 +50,42 @@ function showFonts(fonts) {
 	// add new results
 
 	fonts.forEach(createFontElement);
+
+	results.querySelectorAll(".font").forEach(font => observer.observe(font));
 }
 
 // load fonts
 
-function loadFonts(fonts) {
-	const query = fonts.map(font => `family=${font.family}`).join("&");
-
-	const url = `https://fonts.googleapis.com/css2?${query}`;
+async function loadFont(family, text) {
+	const url = `https://fonts.googleapis.com/css2?family=${family}&text=${text.search()}&display=block.xhr`;
 
 	const link = document.createElement("link");
-
 	link.rel = "stylesheet";
 	link.href = url;
 
 	document.head.appendChild(link);
 }
 
+// load on scroll
+
+const observer = new IntersectionObserver( async entries => {
+	for (const entry of entries) {
+		if (entry.isIntersecting) {
+			const element = entry.target;
+
+			const family = element.querySelector(".family").textContent;
+			const text = "The quick brown fox jumped over the lazy dog";
+
+			loadFont(family, text);
+		}
+	}
+}, { root: results, threshold: 0 });
+
 // load initial fonts
 
 const category = document.getElementById("category-select");
 
-getFonts("date").then( async fonts => {
+fetchFonts("trending").then( async fonts => {
 	showFonts(fonts);
 
 	// add possible categories
@@ -94,16 +108,19 @@ const search = document.getElementById("search-form");
 
 search.addEventListener("submit", event => event.preventDefault());
 
-search.addEventListener("input", event => {
-	event.preventDefault();
-
+function updateResults() {
 	const data = new FormData(search);
 
-	const sort = data.get("sort");
 	const category = data.get("category");
 	const query = data.get("query");
 
-	// load fonts
+	const filtered = fonts.filter(font => (font.category === category || category === "all") && font.family.has(query))
 
-	getFonts(sort, category, query).then(showFonts);
-})
+	showFonts(filtered);
+}
+
+search.sort.addEventListener("change", () => {
+	fetchFonts(search.sort.value).then(updateResults);
+});
+
+search.addEventListener("input", updateResults);
