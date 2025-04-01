@@ -1,0 +1,22 @@
+[
+	{
+		"question": "What is a regular expression in JavaScript?",
+		"answer": "A method that describes a pattern of characters."
+	},
+	{
+		"question": "Which function is used to search for a match in a string?",
+		"answer": "search()"
+	},
+	{
+		"question": "What does the g flag in a regular expression stand for?",
+		"answer": "Global match"
+	},
+	{
+		"question": "What does the i flag in a regular expression stand for?",
+		"answer": "Case-insensitive match"
+	},
+	{
+		"question": "What does the m flag in a regular expression stand for?",
+		"answer": "Multiline match"
+	}
+]
