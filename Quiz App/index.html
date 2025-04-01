@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="styles.css">
+
+	<script src="app.js" defer></script>
+</head>
+<body>
+	<form id="form">
+		<p id="question">Sample question</p>
+
+		<div id="choices" type="A">
+			<div class="choice">
+				<input type="radio" name="choice" id="1" value="1">
+				<label for="1">A) Choice 1</label>
+			</div>
+
+			<div class="choice">
+				<input type="radio" name="choice" id="2" value="2">
+				<label for="2">B) Choice 2</label>
+			</div>
+
+			<div class="choice">
+				<input type="radio" name="choice" id="3" value="3">
+				<label for="3">C) Choice 3</label>
+			</div>
+
+			<div class="choice">
+				<input type="radio" name="choice" id="4" value="4">
+				<label for="4">D) Choice 4</label>
+			</div>
+		</div>
+
+		<p id="feedback"></p>
+
+		<div id="info">
+			<button type="submit">Next</button>
+			<p id="score">Score: 0/0</p>
+		</div>
+	</form>
+</body>
+</html>
