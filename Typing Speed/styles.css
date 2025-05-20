@@ -8,22 +8,43 @@
 	user-select: none;
 
 	font-family: "Roboto Mono", sans-serif;
+	color: hsl(216, 2%, 40%);
 }
 
 body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
 
 	background-color: hsl(216, 5%, 21%);
 
 	min-height: 100vh;
 }
 
+#data {
+	width: 100%;
+	
+	font-size: 1.5rem;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 1rem;
+
+	padding: 2rem;
+}
+
 #text {
-	padding: 4rem;
 	font-size: 1.5rem;
 	white-space: pre-wrap;
+	
+	padding-inline: 2rem;
+	height: 2rem;
+	overflow: hidden;
+
+	scroll-behavior: smooth;
 
 	color: hsl(216, 2%, 40%);
 }
@@ -34,10 +55,8 @@ body {
 
 #missed {
 	text-decoration: underline;
-	text-decoration-color: red;
-	color: red;
-
-	opacity: 0.5;
+	text-decoration-color: hsl(355, 46%, 52%);
+	color: hsl(355, 46%, 52%);
 }
 
 #next {
@@ -47,10 +66,8 @@ body {
 #cursor {
 	position: fixed;
 
-	border-radius: 100vw;
-	width: 2px;
+	width: 1rem;
+	border: 2px solid hsl(47, 71%, 51%);
 
-	background-color: hsl(47, 71%, 51%);
-
-	transition: 100ms ease-out;
+	transition: 100ms;
 }
