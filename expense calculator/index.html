@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Expense Calculator</title>
+
+	<link rel="stylesheet" href="styles.css">
+	<script src="app.js" defer></script>
+</head>
+<body>
+	<div id="calculator">
+		<h1>Monthly Budget Calculator</h1>
+
+		<hr>
+
+		<h2>Inputs</h2>
+
+		<!-- income -->
+
+		<div class="field">
+			<h3>Income</h3>
+
+			<hr>
+
+			<input id="income" placeholder="Enter monthly income" type="number">
+		</div>
+
+		<!-- add and display expenses -->
+
+		<form id="expense-field" class="field">
+			<h3>Add Expenses</h3>
+
+			<hr>
+
+			<div class="input-list">
+				<p>Name</p>
+				<input id="expense-name" placeholder="Enter expense name" type="text" required>
+
+				<p>Amount</p>
+				<input id="expense-amount" placeholder="Enter expense amount" type="number" required>
+			</div>
+
+			<button type="submit" id="add-expense">Add Expense</button>
+
+			<hr>
+
+			<h3>Expenses</h3>
+
+			<div id="expenses" class="input-list expense-list"></div>
+		</form>
+
+		<!-- savings input -->
+
+		<div class="field">
+			<h3>Savings</h3>
+
+			<hr>
+
+			<div class="input-list">
+				<p>Goal</p>
+				<input id="save" placeholder="Enter a monthly savings goal" type="number">
+			</div>
+		</div>
+
+		<h2>Output</h2>
+
+		<!-- monthly overview -->
+
+		<div class="field">
+			<h3>Monthly Overview</h3>
+
+			<div id="monthly" class="input-list">
+				<p>Spent</p>
+				<input readonly type="text">
+
+				<p>Saved</p>
+				<input readonly type="text">
+
+				<hr style="grid-column: span 2;">
+
+				<p>Total Spent</p>
+				<input readonly type="text">
+				
+				<p>Total Left</p>
+				<input readonly type="text">
+			</div>
+
+			<h3>Expense Proportions</h3>
+
+			<div id="pie-data">
+				<div id="pie"></div>
+
+				<div id="pie-key"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

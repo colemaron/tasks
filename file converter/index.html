@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="styles.css">
+	<script src="app.js" type="module" defer></script>
+</head>
+<body>
+	<div id="converter">
+		<input style="display: none;" id="input" type="file" accept=".jpg, .jpeg, .png, .gif, .bmp, .webp, .avif, .tiff, .ico" multiple>
+		
+		<h3>Image Converter</h3>
+
+		<button id="drag">Upload Files</button>
+
+		<h3>Uploaded Files</h3>
+
+		<div class="file-list" id="uploaded"></div>
+
+		<div class="section">
+			<button class="interact" id="remove-uploaded">Remove All Uploaded</button>
+			<button class="interact" id="convert">Convert All Uploaded</button>
+		</div>
+
+		<h3>Convert To</h3>
+
+		<div id="extention">
+			<button class="ext selected">jpg</button>
+			<button class="ext">jpeg</button>
+			<button class="ext">png</button>
+			<button class="ext">gif</button>
+			<button class="ext">webp</button>
+			<!-- <button class="ext">svg</button> -->
+			<button class="ext">bmp</button>
+			<button class="ext">ico</button>
+			<button class="ext">tiff</button>
+			<button class="ext">avif</button>
+		</div>
+
+		<h3>Converted Files</h3>
+		
+		<div class="file-list" id="completed"></div>
+		
+		<div class="section">
+			<button class="interact" id="remove-converted">Remove All Converted</button>
+			<button class="interact" id="download">Download All Converted</button>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Conversion Calculator</title>
+
+	<script src="app.js" defer></script>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div id="calculator">
+		<h2>Unit Converter</h2>
+		
+		<input placeholder="Enter starting unit" type="number" id="input">
+
+		<h3>Type</h3>
+
+		<select size="3" id="type">
+			<option selected value="length">Length</option>
+			<option value="volume">Volume</option>
+			<option value="temperature">Temperature</option>
+		</select>
+
+		<div id="units">
+			<div class="unit-column">
+				<h3 id="from">From:</h3>
+				<select size="1" id="unit-one"></select>
+			</div>
+
+			<div class="unit-column">
+				<h3 id="to">To:</h3>
+				<select size="1" id="unit-two"></select>
+			</div>
+		</div>
+
+		<h3>Result</h3>
+
+		<input type="text" id="output" readonly>
+		<button id="copy">Copy</button>
+	</div>
+</body>
+</html>

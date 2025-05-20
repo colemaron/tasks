@@ -1,0 +1,57 @@
+* {
+	padding: 0;
+	margin: 0;
+
+	font-family: monospace;
+	user-select: none;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+}
+
+#calculator {
+	width: 100%;
+	max-width: 500px;
+	margin: 2rem;
+
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	border: 2px solid black;
+	border-radius: 1rem;
+	padding: 2rem;
+}
+
+select, input {
+	padding: 0.75rem;
+	border-radius: 0.5rem;
+	border: 2px solid black;
+}
+
+#copy {
+	margin: auto;
+	width: 50%;
+
+	padding-block: 0.5rem;
+	border-radius: 0.5rem;
+	border: 2px solid black;
+}
+
+#units {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+
+.unit-column {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	select {
+		min-width: 0;
+	}
+}

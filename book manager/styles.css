@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+	padding: 0;
+	margin: 0;
+
+	box-sizing: border-box;
+	font-family: Poppins;
+	white-space: nowrap;
+}
+
+#library {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+
+	margin: 1rem auto;
+	border-radius: 1rem;
+	min-width: 500px;
+	width: 60vw;
+
+	padding: 2rem;
+	background-color: white;
+}
+
+hr {
+	border: none;
+	height: 1px;
+	backdrop-filter: invert(1);
+}
+
+input {
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.25rem;
+	border: none;
+}
+
+body {
+	background-color: rgb(240, 240, 240);
+}
+
+button {
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.25rem;
+	width: 50%;
+	margin: 0 auto;
+	border: none;
+
+	outline: 3px solid transparent;
+
+	&:hover {
+		width: 60%;
+		outline: 3px solid rgb(190, 190, 190);
+	}
+
+	&:active {
+		background-color: rgb(75, 75, 75);
+		outline: 3px solid black;
+		width: 55%;
+		color: white;
+	}
+
+	transition: 150ms;
+}
+
+.add {
+	background-color: rgb(175, 255, 175);
+}
+
+.remove {
+	background-color: rgb(255, 175, 175);
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	background-color: rgb(240, 240, 240);
+	padding: 1rem;
+	border-radius: 0.5rem;
+}
+
+#shelf {
+	padding-left: 1rem;
+}

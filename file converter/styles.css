@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+	padding: 0;
+	margin: 0;
+
+	box-sizing: border-box;
+	font-family: Poppins;
+
+	color: #222;
+	text-overflow: ellipsis;
+}
+
+/* main format */
+
+#converter {
+	width: 50vw;
+	min-width: 400px;
+	margin: 2rem auto;
+	padding: 2rem;
+
+	background: white;
+	border: 1px solid #ddd;
+	border-radius: 1rem;
+	box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+/* info section */
+
+.section {
+	display: flex;
+	gap: 1rem;
+}
+
+/* file upload */
+
+#drag {
+	width: 100%;
+	height: 150px;
+	background-color: #e1e1e1;
+	border: 2px dashed #999;
+
+	background-image: repeating-linear-gradient(
+		-45deg, 
+		transparent, 
+		transparent 10px,
+		#e1e1e1 10px,
+		#e1e1e1 20px
+	);
+
+	border-radius: 0.5rem;
+	font-size: 1rem;
+	font-weight: 500;
+
+	&:hover {
+		background-color: #ccc;
+	}
+
+	transition: 200ms;
+}
+
+/* file lists */
+
+.file-list {
+	border-radius: 1rem;
+	padding: 1rem;
+
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+/* uploaded file list */
+
+.uploaded-file {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+
+	border: 2px solid #efefef;
+	border-radius: 0.5rem;
+	padding: 0.5rem 1rem;
+
+	> *:first-child {
+		margin-right: auto;
+
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
+
+.list-button {
+	padding: 0.25rem 0.75rem;
+	border-radius: 0.25rem;
+	background-color: #efefef;
+	color: #333;
+
+	border: none;
+
+	&:hover {
+		background-color: #333;
+		color: #efefef;
+	}
+
+	transition: 150ms;
+}
+
+/* convert to selection */
+
+#extention {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.ext {
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	border: none;
+
+	&:hover {
+		outline: 2px dashed #999;
+	}
+
+	transition: background-color 200ms;
+}
+
+.selected {
+	background-color: #333;
+	color: #efefef;
+}
+
+/* buttons */
+
+.interact {
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 0.5rem;
+
+	background-color: #333;
+	color: #efefef;
+
+	flex-shrink: 1;
+	flex-grow: 1;
+	width: 0;
+
+	overflow: hidden;
+
+	&:hover {
+		background-color: #efefef;
+		color: #333;
+	}
+
+	transition: 150ms;
+}
+
+button {
+	cursor: pointer;
+}

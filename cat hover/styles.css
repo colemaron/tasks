@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    font-family: Poppins;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    /* background-color: rgb(15, 15, 15); */
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    gap: 25px;
+    padding-inline: 50px;
+}
+
+/* default */
+
+.card {
+    background-color: rgb(30, 30, 30);
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 150px;
+    height: 200px;
+    z-index: 0;
+    border: none;
+
+    img {
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 1;
+        border-radius: 0.5rem;
+    }
+
+    h2 {
+        text-align: center;
+        color: white;
+    }
+
+    transition: 200ms cubic-bezier(0.25, 0, 0, 1.5);
+}
+
+/* hover around effects */
+
+.card:has(+ * + .card:hover) {
+    transform: perspective(100px) rotateY(-3deg) translateZ(5px) translateX(-15px);
+}
+
+.card:has(+ .card:hover) {
+    transform: perspective(100px) rotateY(-7deg) translateZ(15px) translateX(-24px);
+}
+
+.card:hover {
+    transform: perspective(100px) translateZ(30px) rotateZ(3deg);
+}
+
+.card:hover + * {
+    transform: perspective(100px) rotateY(7deg) translateZ(15px) translateX(24px);
+}
+
+.card:hover + * + * {
+    transform: perspective(100px) rotateY(3deg) translateZ(5px) translateX(15px);
+}
+
+/* click effect */
+
+.card:active {
+    transform: perspective(100px) translateZ(15px) rotateZ(-3deg);
+
+    box-shadow: 0 0 1rem 5px lightblue;
+    border: 5px solid lightblue;
+
+    transition: 150ms cubic-bezier(0.5, 0, 0, 1);
+}
+
+/* cat name */
+
+#cat-name {
+    padding-bottom: 10rem;
+}
+
+/* active cat */
+
+.active-cat {
+    box-shadow: 0 0 1rem 5px lightskyblue;
+    border: 5px solid lightskyblue;
+
+    filter:
+}

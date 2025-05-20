@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<img src="" alt="">
+
+	<script>
+		let index = 0;
+
+		const images = [
+			"https://lh3.googleusercontent.com/drive-storage/AJQWtBMs7vH6SOz3EOe7od4u9kaGf2s25PZRAbwHVtZNzDXE9EmXg_9UUERdGuO0W_l-SfsVjQux_YvMUtQSABHQIY5XnoVECAhQiDF0z35Nj5wbqg=w1901-h998",
+			"https://lh3.googleusercontent.com/drive-storage/AJQWtBPT7Dw2Ql0jkUedhnvGNM1xqL38ncl6wBuIMKLU-JYZZ8CdGrHsB4otMXN6FctCWxf-NDZM37wMM7SHM7lvoDp049XbJnaXNC1Onq5ua1h_bg=w1901-h998",
+			"https://lh3.googleusercontent.com/drive-storage/AJQWtBPyFVCskhCiZlwE4rUmKfRC4ohb6YRLyqjSLz2v-dqmTJqQyg971RfSdGGbp1WfMo3Psa6kGLSWiEpdUCOubeLGprHPyggf0DOk68zJuMrrSg=w1901-h998",
+			"https://lh3.googleusercontent.com/drive-storage/AJQWtBNW-zvrQrFfogtM3llcHpsnYMPT13gI_zh3rEvF2KijdI6J4Qh75FzEI7A6HlPCwq4r-ItUEpFO5IV9_WGusmagQnoQRbKmk7hiyx9cXL154g=w1901-h998",
+			"https://lh3.googleusercontent.com/drive-storage/AJQWtBOeKEVNUR43zqp_pCi8PLultjR7QfrXX2r9CNwA9GaJb0ZLZY82sAqJLa6VtjIuYaQbXuyoWBL-A8gOU98TBBan8WUMjZ7j5bA_owvKvxLteg=w1901-h998"
+		]
+
+		setInterval(() => {
+			index++;
+
+			if (index >= images.length) index = 0;
+
+			document.querySelector("img").src = images[index];
+		}, 1000);
+	</script>
+</body>
+</html>

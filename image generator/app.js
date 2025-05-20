@@ -1,0 +1,1 @@
+document.getElementById("image").addEventListener("click", () => document.getElementById("image").src = `https://picsum.photos/0/0?seed=${Math.random()}}`)

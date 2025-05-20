@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<style>
+		img {
+			border-radius: 50%;
+			width: 100px;
+			height: 100px;
+
+			position: fixed;
+		}
+	</style>
+</head>
+<body>
+	<img src="https://lh3.googleusercontent.com/drive-storage/AJQWtBO5QsoUbSAmUki68Rb8boo9DQZYbESigVxGYopKnGSE6UWIk94L6KAif07U-VkvnrcDBUbtShsZL1KeAz4TKN5ctO376BUwwmvocrvMghy7kQ=w1901-h998" alt="">
+
+	<script>
+		setInterval(() => {
+			document.querySelector("img").style.left = performance.now() / 10 + "px";
+		}, 10);
+	</script>
+</body>
+</html>

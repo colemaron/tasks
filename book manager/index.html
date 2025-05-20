@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="styles.css">
+	<script src="app.js" defer></script>
+</head>
+<body>
+	<div id="library">
+		<h1>Book Management System</h1>
+
+		<div class="section">
+			<h4>Add Books</h4>
+
+			<hr>
+
+			<input placeholder="Enter book name" id="title" type="text">
+			<button class="add" id="add-front">Add to front</button>
+			<button class="add" id="add-end">Add to end</button>
+		</div>
+	
+		<div class="section">
+			<h4>Remove Books</h4>
+
+			<hr>
+
+			<button class="remove" id="remove-front">Remove from front</button>
+			<button class="remove" id="remove-end">Remove from end</button>
+		</div>
+	
+		<div class="section">
+			<h4>Book List</h4>
+
+			<hr>
+
+			<ol id="shelf">No books added</ol>
+		</div>
+	</div>
+</body>
+</html>
